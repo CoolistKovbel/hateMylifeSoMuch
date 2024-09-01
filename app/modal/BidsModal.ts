@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export interface IBidsModal {
-  account: any;
+  account: string;
   price: number;
   amount: number;
   tokenSYMBOL: string;
@@ -14,8 +14,7 @@ export interface IBidsModal {
 const BidsModalSchema = new mongoose.Schema<IBidsModal>(
   {
     account: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
     },
     price: {
       type: Number,

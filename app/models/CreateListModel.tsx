@@ -25,15 +25,29 @@ const CreateListModel = () => {
 
     const form = e.target as HTMLFormElement;
 
-  
     try {
+      console.log("kil yourself", user[0]);
 
-      console.log("kil yourself", user[0])
+  
 
+      // await HandleUserBigPost({
+      //   account: 90,
+      //   TokenBuyAmount: 0,
+      //   TokenSellPrice: 0,
+      //   TokenIn: 0,
+      // });
 
+      console.log(form[0].checked);
+      console.log(form[1].checked);
+      console.log(form[2].checked);
+      console.log(form[3].checked);
+      console.log(form[4].checked);
 
+      
 
-    
+      console.log(form[5].value);
+      console.log(form[6].value);
+
       router.refresh();
       onClose();
     } catch (error) {
@@ -56,7 +70,6 @@ const CreateListModel = () => {
         open={isModalOpen}
         className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
       >
-
         <header className="p-5">
           <h2 className="text-2xl">Create a Bid</h2>
           <p className="text-sm text-gray-500 p-4 italic">
@@ -136,7 +149,7 @@ const CreateListModel = () => {
           </label>
 
           <label htmlFor="TokenBuyAmount" className="flex flex-col gap-3">
-            <span className="text-xl font-bold">Token amount;</span>
+            <span className="text-xl font-bold">Token amount:</span>
             <input
               type="number"
               placeholder="amount"
@@ -147,7 +160,7 @@ const CreateListModel = () => {
           </label>
 
           <label htmlFor="TokenSellPrice" className="flex flex-col gap-3">
-            <span className="text-xl font-bold">Sell Price;</span>
+            <span className="text-xl font-bold">Sell Price:</span>
             <input
               type="number"
               placeholder="amount"
