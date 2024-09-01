@@ -113,11 +113,10 @@ const BidsPanel = () => {
 
     console.log(
       "high",
-       BidData.sort((prev: any, current: any) => {
-            return prev.value + current.value;
-          })
+      BidData.sort((prev: any, current: any) => {
+        return prev.value + current.value;
+      })
     );
-
   };
 
   return (

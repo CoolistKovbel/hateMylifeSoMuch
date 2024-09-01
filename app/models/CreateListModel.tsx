@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { ethers } from "ethers";
 import { useModal } from "@/app/hooks/use-modal-store";
 import Image from "next/image";
-import { CreateBidAction } from "../lib/action";
+import { CreateBidAction } from "../lib/functions";
 
 const CreateListModel = () => {
   const { isOpen, onClose, type, signature } = useModal();
@@ -61,13 +61,11 @@ const CreateListModel = () => {
 
       payload.signature = signature;
 
-
-      console.log(payload.token, "the tplke")
-
+      console.log(payload.token, "the tplke");
 
       const res = await CreateBidAction(JSON.stringify(payload));
-      
-      console.log(res)
+
+      console.log(res);
 
       router.refresh();
 
@@ -92,7 +90,6 @@ const CreateListModel = () => {
         open={isModalOpen}
         className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
       >
-
         <header className="p-5">
           <h2 className="text-2xl">Create a Bid</h2>
           <p className="text-sm text-gray-500 p-4 italic">
@@ -197,7 +194,6 @@ const CreateListModel = () => {
             Create
           </button>
         </form>
-
       </dialog>
     </div>
   );
