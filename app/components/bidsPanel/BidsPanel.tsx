@@ -121,6 +121,7 @@ const BidsPanel = () => {
 
   return (
     <div>
+
       <header className="flex items-center justify-between p-5 bg-[#555]">
         <button
           onClick={handleCreate}
@@ -171,6 +172,7 @@ const BidsPanel = () => {
           </div>
         ))}
       </div>
+
     </div>
   );
 };

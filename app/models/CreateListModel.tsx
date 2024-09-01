@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { ethers } from "ethers";
 import { useModal } from "@/app/hooks/use-modal-store";
 import Image from "next/image";
-import { CreateBidAction } from "../lib/functions";
+import { HandleUserBigPost } from "../lib/actions";
 
 const CreateListModel = () => {
   const { isOpen, onClose, type, signature } = useModal();
@@ -25,50 +25,16 @@ const CreateListModel = () => {
 
     const form = e.target as HTMLFormElement;
 
-    // user data
-    const payload: {
-      token: string;
-      amount: string;
-      selling: string;
-      signature: string;
-    } = {
-      token: "",
-      amount: "",
-      selling: "",
-      signature: "",
-    };
-
+  
     try {
-      // Accessing form elements using the `elements` property
-      const message = `Im selling`;
-      const signature = await signer.signMessage(message);
 
-      console.log(form);
+      console.log("kil yourself", user[0])
 
-      for (let i = 0; i < 4; i++) {
-        if (form[i].checked === true) {
-          payload.token = (form[i] as any).value;
-        }
-      }
 
-      (payload.amount as any) = ethers.utils.parseEther(
-        (form[5].value as any).toString()
-      );
 
-      (payload.selling as any) = ethers.utils.parseEther(
-        (form[6].value as any).toString()
-      );
 
-      payload.signature = signature;
-
-      console.log(payload.token, "the tplke");
-
-      const res = await CreateBidAction(JSON.stringify(payload));
-
-      console.log(res);
-
+    
       router.refresh();
-
       onClose();
     } catch (error) {
       console.log(error);
@@ -90,6 +56,7 @@ const CreateListModel = () => {
         open={isModalOpen}
         className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
       >
+
         <header className="p-5">
           <h2 className="text-2xl">Create a Bid</h2>
           <p className="text-sm text-gray-500 p-4 italic">

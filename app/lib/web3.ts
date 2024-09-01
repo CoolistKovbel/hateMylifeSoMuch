@@ -78,18 +78,14 @@ export const AccessTokenContractData = async (
     const signer = provider.getSigner();
     const account = await signer.getAddress();
 
-    console.log(account);
-
     const contractInstance = new ethers.Contract(
       tokenAddress,
-      daiAbi,
+      erc20abi,
       provider
     );
 
     console.log(contractInstance);
-    const gg = await contractInstance.callStatic.approve(account, amount);
 
-    console.log(gg);
 
     // const res = await contractInstance.callStatic.approve(account[0], amount);
 
