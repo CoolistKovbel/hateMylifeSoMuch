@@ -4,6 +4,7 @@ import BuyUserBidModel from "../models/BuyUserBidModel";
 import ConnectUserModel from "../models/ConnectUser";
 import CreateListModel from "../models/CreateListModel";
 import MotherFuckingTokenAddModal from "../models/MotherFuckingTokenAddModal";
+import StupidFuckingRequest from "../models/StupidFuckingRequest";
 
 export const ModalProvider = () => {
   const [isMounted, setIsmounted] = useState(false);
@@ -22,6 +23,7 @@ export const ModalProvider = () => {
       <ConnectUserModel />
       <CreateListModel />
       <MotherFuckingTokenAddModal />
+      <StupidFuckingRequest />
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import { useModal } from "../hooks/use-modal-store";
 import { toast } from "react-toastify";
+import { HandleStupidFaucetAddition } from "../lib/actions";
 
 const MotherFuckingTokenAddModal = () => {
   const { isOpen, onClose, type, signature } = useModal();
@@ -8,9 +9,19 @@ const MotherFuckingTokenAddModal = () => {
 
   const isModalOpen = isOpen && type === "KillUserDreamsFuacet";
 
-  const onSubmit = async () => {
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
     try {
       console.log("handling the stupid request.");
+      const res = await HandleStupidFaucetAddition(data);
+        if(res.status === "Success") {
+            toast("There was a success")
+            console.log(res.payload)
+        }
+
+
+        onClose()
     } catch (error) {
       toast(
         "Stupid fucking error accured, cant fucking add a fucking token you stupid fucking dipshit."
@@ -56,6 +67,28 @@ const MotherFuckingTokenAddModal = () => {
             />
           </label>
 
+          <label htmlFor="TokenContractName" className="flex flex-col gap-3">
+            <span className="text-xl font-bold">Token Contract Name:</span>
+            <input
+              type="text"
+              placeholder="Enter the fucking contract name"
+              name="TokenContractName"
+              id="TokenContractName"
+              className="p-2 bg-[#544] rounded drop-shadow-lg"
+            />
+          </label>
+
+          <label htmlFor="TokenContractSymbol" className="flex flex-col gap-3">
+            <span className="text-xl font-bold">Token Contract Symbol:</span>
+            <input
+              type="text"
+              placeholder="Enter the fucking contract Symbol"
+              name="TokenContractSymbol"
+              id="TokenContractSymbol"
+              className="p-2 bg-[#544] rounded drop-shadow-lg"
+            />
+          </label>
+
           <label htmlFor="TokenContractABI" className="flex flex-col gap-3">
             <span className="text-xl font-bold">ABI Contract:</span>
             <textarea
@@ -84,7 +117,21 @@ const MotherFuckingTokenAddModal = () => {
               placeholder="Set the fucking reward rate "
               name="TokenRewardRate"
               id="TokenRewardRate"
-              className="p-2 bg-[#544] rounded drop-shadow-lg"
+              className="p-2 bg-[#544] rounded drop-shadow-lg resize-none overflow-auto"
+            />
+          </label>
+
+          <label
+            htmlFor="TokenRewardRateTimeSet"
+            className="flex flex-col gap-3"
+          >
+            <span className="text-xl font-bold">Token Reward Rate: (minutes)</span>
+            <input
+              type="number"
+              placeholder="Set the fucking fucet timer "
+              name="TokenRewardRateTimeSet"
+              id="TokenRewardRateTimeSet"
+              className="p-2 bg-[#544] rounded drop-shadow-lg resize-none overflow-auto"
             />
           </label>
 
