@@ -2,8 +2,61 @@
 
 import { useModal } from "@/app/hooks/use-modal-store";
 import Image from "next/image";
+import { useState } from "react";
 
 const BidsPanel = () => {
+  // Call... maybe.......
+  const BidData: any = [
+    {
+      id: crypto.randomUUID(),
+      tokenImage: "/bitcoinpng.png",
+      amount: 0.1,
+      value: 4345,
+      token: "BTC",
+      seller: crypto.randomUUID().slice(0, 8),
+      date: Number(Date.now()),
+    },
+    {
+      id: crypto.randomUUID(),
+      tokenImage: "/ethereumpng.png",
+      amount: 1,
+      value: 4310,
+      token: "ETH",
+      seller: crypto.randomUUID().slice(0, 8),
+      date: Number(Date.now()),
+    },
+    {
+      id: crypto.randomUUID(),
+      amount: 0.1,
+      value: 4,
+      tokenImage: "/shiba-inu-shib-logo.svg",
+      token: "SHIB",
+      seller: crypto.randomUUID().slice(0, 8),
+      date: Number(Date.now()),
+    },
+    {
+      id: crypto.randomUUID(),
+      amount: 43,
+      value: 3,
+      tokenImage: "/DOGEpng.png",
+      token: "DOGE",
+      seller: crypto.randomUUID().slice(0, 8),
+      date: Number(Date.now()),
+    },
+    {
+      id: crypto.randomUUID(),
+      amount: 0.1,
+      value: 1,
+      tokenImage: "/NueroClumpToken.png",
+      token: "NCT",
+      seller: crypto.randomUUID().slice(0, 8),
+      date: Number(Date.now()),
+    },
+  ];
+
+  const [filester, setFulester] = useState("xxx");
+  const [currentData, setCurrentData] = useState<any>([]);
+
   const { onOpen } = useModal();
 
   const handleCreate = async () => {
@@ -18,61 +71,54 @@ const BidsPanel = () => {
 
   const selectBid = async (e: any) => {
     const { value } = e.target;
+
     console.log(value);
+
     switch (value) {
       case value === "HighValue":
         console.log("switging to ", value);
+        setCurrentData(
+          BidData.sort((prev: any, current: any) => {
+            return current.value - prev.value;
+          })
+        );
+        console.log(currentData);
+        setFulester(value);
       case value === "LowValue":
+        setCurrentData(
+          BidData.sort((prev: any, current: any) => {
+            return prev.value - current.value;
+          })
+        );
         console.log("switging to ", value);
+        setFulester(value);
       case value === "Recent":
+        setCurrentData(
+          BidData.reduce((x: any, y: any) => {
+            return y.date - x.date;
+          })
+        );
         console.log("switging to ", value);
+        setFulester(value);
       default:
         console.log("----👉🫶👈----");
     }
-  };
 
-  const bidData = [
-    {
-      id: crypto.randomUUID(),
-      tokenImage: "/bitcoinpng.png",
-      amount: 0.1,
-      value: 4345,
-      token: "BTC",
-      seller: crypto.randomUUID().slice(0, 8),
-    },
-    {
-      id: crypto.randomUUID(),
-      tokenImage: "/ethereumpng.png",
-      amount: 1,
-      value: 4310,
-      token: "ETH",
-      seller: crypto.randomUUID().slice(0, 8),
-    },
-    {
-      id: crypto.randomUUID(),
-      amount: 0.1,
-      value: 43,
-      tokenImage: "/shiba-inu-shib-logo.svg",
-      token: "SHIB",
-      seller: crypto.randomUUID().slice(0, 8),
-    },
-    {
-      id: crypto.randomUUID(),
-      amount: 43,
-      value: 43,
-      tokenImage: "/DOGEpng.png",
-      token: "DOGE",
-      seller: crypto.randomUUID().slice(0, 8),
-    },
-    {
-      id: crypto.randomUUID(),
-      amount: 0.1,
-      value: 150,
-      tokenImage: "/NueroClumpToken.png",
-      token: "NCT",
-      seller: crypto.randomUUID().slice(0, 8),
-    },
-  ];
+    console.log(
+      "low",
+      BidData.sort((prev: any, current: any) => {
+        return current.value - prev.value;
+      })
+    );
+
+    console.log(
+      "high",
+       BidData.sort((prev: any, current: any) => {
+            return prev.value + current.value;
+          })
+    );
+
+  };
 
   return (
     <div>
@@ -102,8 +148,9 @@ const BidsPanel = () => {
         </label>
       </header>
 
+      {/* ui */}
       <div className="flex items-center justify-between w-[80%] mx-auto h-[720px] overflow-auto p-4 drop-shadow-lg rounded gap-10 flex-wrap">
-        {bidData.map((item, i) => (
+        {currentData.map((item, i) => (
           <div
             key={i}
             className="w-[300px] h-[300px] drop-shadow-lg p-4 bg-[#333] rounded flex flex-col justify-between"
