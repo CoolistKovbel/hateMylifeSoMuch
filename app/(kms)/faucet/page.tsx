@@ -1,8 +1,13 @@
 import FaucetData from "@/app/components/faucetPanel/faucetData";
 import FaucetDeath from "@/app/components/faucetPanel/faucetDeath";
+import { HandleGetAllTheFuckingFucets } from "@/app/lib/actions";
 import React from "react";
 
-const Page = () => {
+const Page = async () => {
+
+  const StupidFaucets = await HandleGetAllTheFuckingFucets()
+
+
   return (
     <section>
       <header className="p-10 text-center">
@@ -30,7 +35,7 @@ const Page = () => {
           </select>
 
           {/* faucet data */}
-          <FaucetData />
+          <FaucetData AllFucets={StupidFaucets} />
         </div>
       </div>
     </section>

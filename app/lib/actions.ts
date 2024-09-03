@@ -1,6 +1,7 @@
 "use server";
 
 import { BidsModal } from "../modal/BidsModal";
+import { Email } from "../modal/EmailModal";
 import { StupidFuckingFaucetTokenAddition } from "../modal/StupidFuckingFaucetTokenAddition";
 import dbConnect from "./db";
 
@@ -61,3 +62,51 @@ export const HandleStupidFaucetAddition = async (data: FormData) => {
     };
   }
 };
+
+export const HandleGetAllTheFuckingFucets = async () => {
+  try {
+    console.log('handling the fucking fuects')
+
+
+    await dbConnect()
+
+
+    const fuckingStupidData = await StupidFuckingFaucetTokenAddition.find({})
+
+    
+    return {
+      status: "success",
+      payload: fuckingStupidData
+    }
+  } catch (error) {
+    return {
+      status: "error",
+      payload: error
+    }
+  }
+}
+
+// Set user email in mailing list
+export const handleUserEmailMailinglist = async ( email: string ) => {
+  try {
+    
+    await dbConnect()
+
+    const e = new Email({
+      email
+    })
+
+    e.save()
+
+
+    return {
+      status: "success",
+      payload: "user is on the mailing list"
+    }
+  } catch (error) {
+    return {
+      status: "error",
+      payload: error
+    }
+  }
+}
