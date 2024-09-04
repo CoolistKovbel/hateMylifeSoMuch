@@ -4,9 +4,7 @@ import { HandleGetAllTheFuckingFucets } from "@/app/lib/actions";
 import React from "react";
 
 const Page = async () => {
-
-  const StupidFaucets = await HandleGetAllTheFuckingFucets()
-
+  const StupidFaucets = await HandleGetAllTheFuckingFucets();
 
   return (
     <section>
