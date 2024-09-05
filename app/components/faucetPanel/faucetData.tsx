@@ -9,14 +9,9 @@ interface FacuetDataProps {
 const FaucetData = ({ AllFucets }: FacuetDataProps) => {
   let stupidFuckingData: any = JSON.parse(AllFucets).payload || [];
 
-  if (AllFucets.status === "error") {
+  if (AllFucets.status === "error" || stupidFuckingData.length === 0) {
     toast("There are no faucets avaible");
   }
-
-  console.log(
-    "the stupid data data in the stupid data. ",
-    stupidFuckingData[stupidFuckingData.length - 1].faucetWaitTime
-  );
 
 
 

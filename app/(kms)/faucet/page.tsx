@@ -23,6 +23,7 @@ const Page = async () => {
         <FaucetDeath />
 
         <div className="text-center">
+          
           <select
             name="sortBy"
             id="sortBy"

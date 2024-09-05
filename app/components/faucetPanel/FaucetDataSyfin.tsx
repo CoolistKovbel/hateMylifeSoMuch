@@ -13,24 +13,25 @@ const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
 
   // recoursive
   const FucetCoundown = (timeSet: string) => {
-    let testH = timeSet.toString().split("H")[0];
-    let testM: any = timeSet.toString().split(" ")[1];
+    console.log(timeSet);
+    let testH = timeSet.split("H")[0];
+    let testM: any = timeSet.split(" ")[1];
     testM = [testM].toString().split("M")[0];
 
     if (Number(testH) === 0 && Number(testM) === 0) {
       return "EXPIRED";
     }
 
-    console.log(testH + "h " + testM + "m ");
-
+    
     while (Number(testM) > 0) {
       fMinute.current = Number(testM) - 1;
+      console.log(testH + "h " + testM + "m ");
     }
     while (Number(testH) > 0) {
       fHour.current = Number(testH) - 1;
-      fMinute.current = +60;
+      fMinute.current =+ 60;
+      console.log(testH + "h " + testM + "m ");
     }
-
   };
 
   useEffect(() => {
@@ -39,7 +40,6 @@ const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
 
     return () => clearInterval(intervalId);
   }, [ref]);
-
 
   return (
     <ul className=" bg-[#6C4675] ">
@@ -52,14 +52,15 @@ const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
             <li>{item.token}</li>
             <li>{item.faucetWaitTime} </li>
             <li>{item.amount}</li>
+
             <li className="w-[100px]">
               <p className="flex items-center justify-between">
                 <span>hours:</span>
-                {fHour.current}
+                {fHour.current || FucetCoundown(item.faucetWaitTime)}
               </p>
               <p className="flex items-center justify-between">
                 <span>minute:</span>
-                {fMinute.current}
+                {fMinute.current || FucetCoundown(item.faucetWaitTime)}
               </p>
             </li>
 

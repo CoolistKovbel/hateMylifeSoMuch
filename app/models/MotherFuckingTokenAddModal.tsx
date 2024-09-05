@@ -34,7 +34,6 @@ const MotherFuckingTokenAddModal = () => {
         isModalOpen ? "block" : "hidden"
       }`}
     >
-
       <div className="fixed inset-0 bg-black opacity-50" onClick={onClose}>
         x
       </div>
@@ -43,7 +42,6 @@ const MotherFuckingTokenAddModal = () => {
         open={isModalOpen}
         className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
       >
-        
         <header className="p-5">
           <h2 className="text-2xl">Add Token To Fucking Faucet</h2>
           <p className="text-sm text-gray-500 p-4 italic">
@@ -156,8 +154,8 @@ const MotherFuckingTokenAddModal = () => {
           </button>
         </form>
 
+        
       </dialog>
-
     </div>
   );
 };
