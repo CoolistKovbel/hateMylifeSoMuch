@@ -36,6 +36,7 @@ const StupidFuckingFaucetTokenAdditionSchema =
       tokenABI: {
         type: String,
       },
+
     },
     { timestamps: true }
   );

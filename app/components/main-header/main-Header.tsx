@@ -3,12 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const MainHeader = () => {
-
-
   // TODO GET USER SETUP
-
-
-
 
   const [toggle, setToggle] = useState(false);
 
@@ -18,9 +13,9 @@ const MainHeader = () => {
     <header className=" relative z-20 flex flex-col gap-10 w-full">
       <div className="flex items-center justify-between">
         {isLogged ? (
-          <h1 className="text-2xl">Hello mother fucker</h1>
+          <h1 className="text-2xl font-bold">Hello mother fucker</h1>
         ) : (
-          <h1 className="text-2xl">5ehopswa</h1>
+          <h1 className="text-2xl font-bold">5ehopswa</h1>
         )}
 
         {isLogged ? (
@@ -31,7 +26,9 @@ const MainHeader = () => {
             ____ ↓
           </div>
         ) : (
-          <button className="bg-[#111] p-2 hover:bg-[#333] rounded drop-shadow-lg">Connect with metamask</button>
+          <button className="bg-[#111] p-2 hover:bg-[#333] rounded drop-shadow-lg">
+            Connect with metamask
+          </button>
         )}
 
         {toggle && (
@@ -48,11 +45,32 @@ const MainHeader = () => {
           </div>
         )}
       </div>
-      <nav className="w-[90%] mx-auto flex justify-around items-center drop-shadow-lg bg-[#f0f8ff37] p-3 rounded">
-        <Link href="/bidUp">Want to bleed.</Link>
-        <Link href="/faucet">want to die.</Link>
-        <Link href="/">Need sucide.</Link>
-        <Link href="/">Want to sell your soul.</Link>
+
+      <nav className="w-[90%] mx-auto flex justify-around items-center drop-shadow-lg bg-[#f0f8ff37] p-5 rounded">
+        <Link
+          href="/bidUp"
+          className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666]"
+        >
+          Want to bleed.
+        </Link>
+        <Link
+          href="/faucet"
+          className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666]"
+        >
+          want to die.
+        </Link>
+        <Link
+          href="/"
+          className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666]"
+        >
+          Need sucide.
+        </Link>
+        <Link
+          href="/"
+          className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666]"
+        >
+          Want to sell your soul.
+        </Link>
       </nav>
     </header>
   );

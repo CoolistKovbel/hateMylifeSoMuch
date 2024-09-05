@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const MainFooter = () => {
   return (
-    <footer className="flex items-center md:flex-row flex-col justify-between w-full bg-[#11111174] drop-shadow-lg border-t-5 border-white p-5 gap-10">
+    <footer className="flex items-center md:flex-row flex-col justify-between w-full bg-[#11111174] drop-shadow-lg border-t-5 border-white p-5 mt-10 gap-10">
       <div className="w-[60%]">
         <h2 className="text-2xl font-bold">Smile</h2>
         <p className="text-sm text-gray-500">
