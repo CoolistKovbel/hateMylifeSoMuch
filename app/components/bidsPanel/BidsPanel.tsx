@@ -149,7 +149,7 @@ const BidsPanel = () => {
 
       {/* ui */}
       <div className="flex items-center justify-between w-[80%] mx-auto h-[720px] overflow-auto p-4 drop-shadow-lg rounded gap-10 flex-wrap">
-        {currentData.map((item, i) => (
+        {currentData.map((item: any, i: any) => (
           <div
             key={i}
             className="w-[300px] h-[300px] drop-shadow-lg p-4 bg-[#333] rounded flex flex-col justify-between"
