@@ -50,7 +50,7 @@ const ConnectUserModel = () => {
       <div
         className="fixed inset-0 bg-black opacity-50"
         onClick={onClose}
-      ></div>
+      >x</div>
 
       <dialog
         open={isModalOpen}

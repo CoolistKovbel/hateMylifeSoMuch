@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type ModalType = "KillUserDreamsFuacet" | "KillSelfAddition" | "CreateBid" | "BuyUserBid";
+export type ModalType = "KillUserDreamsFuacet" | "KillSelfAddition" | "CreateBid" | "BuyUserBid" | "ConnectUser";
 
 interface ModalData {
   server?: any;
