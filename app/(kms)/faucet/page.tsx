@@ -34,9 +34,11 @@ const Page = async () => {
           </select>
 
           {/* faucet data */}
-          <FaucetData AllFucets={StupidFaucets} />
+          <FaucetData AllFucets={JSON.stringify(StupidFaucets)} />
         </div>
       </div>
+
+
     </section>
   );
 };

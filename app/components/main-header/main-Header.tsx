@@ -59,7 +59,7 @@ const MainHeader = () => {
         {isLogged ? (
           <h1 className="text-2xl font-bold">Hello, {`${userHandle}`}</h1>
         ) : (
-          <h1 className="text-2xl font-bold">5ehopswa</h1>
+          <h1 className="text-2xl font-bold"><Link href="/">5ehopswa</Link></h1>
         )}
 
         {isLogged ? (

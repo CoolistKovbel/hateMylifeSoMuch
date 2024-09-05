@@ -7,7 +7,7 @@ interface FacuetDataProps {
 }
 
 const FaucetData = ({ AllFucets }: FacuetDataProps) => {
-  let stupidFuckingData: any = AllFucets.payload || [];
+  let stupidFuckingData: any = JSON.parse(AllFucets).payload || [];
 
   if (AllFucets.status === "error") {
     toast("There are no faucets avaible");

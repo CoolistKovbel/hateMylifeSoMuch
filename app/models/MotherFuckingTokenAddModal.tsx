@@ -34,6 +34,7 @@ const MotherFuckingTokenAddModal = () => {
         isModalOpen ? "block" : "hidden"
       }`}
     >
+
       <div className="fixed inset-0 bg-black opacity-50" onClick={onClose}>
         x
       </div>
@@ -55,7 +56,6 @@ const MotherFuckingTokenAddModal = () => {
           onSubmit={onSubmit}
           className="flex flex-col gap-5 bg-[#666] p-10 rounded drop-shadow-lg overflow-auto h-[500px]"
         >
-
           <label htmlFor="TokenContract" className="flex flex-col gap-3">
             <span className="text-xl font-bold">Token Contract:</span>
             <input
@@ -95,7 +95,7 @@ const MotherFuckingTokenAddModal = () => {
               placeholder="Enter the fucking contractABI motherfuckier"
               name="TokenContractABI"
               id="TokenContractABI"
-              className="p-2 bg-[#544] rounded drop-shadow-lg h-[300px]"
+              className="p-2 bg-[#544] rounded drop-shadow-lg h-[300px] resize-none overflow-auto"
             ></textarea>
           </label>
 
@@ -123,25 +123,41 @@ const MotherFuckingTokenAddModal = () => {
 
           <label
             htmlFor="TokenRewardRateTimeSet"
-            className="flex flex-col gap-3"
+            className="flex flex-col gap-3 bg-[#8f4fa4E1] p-3 rounded drop-shadow"
           >
-            <span className="text-xl font-bold">
-              Token Reward Rate: (multiple by 60 before)
+            <span className="text-xl font-bold underline text-center font-bold">
+              Set Countdown
             </span>
-            <input
-              type="number"
-              placeholder="Set the fucking fucet timer "
-              name="TokenRewardRateTimeSet"
-              id="TokenRewardRateTimeSet"
-              className="p-2 bg-[#544] rounded drop-shadow-lg resize-none overflow-auto"
-            />
+            <div className="flex items-center justify-around">
+              <input
+                type="number"
+                max="12"
+                min="0"
+                placeholder="H"
+                name="TokenRewardRateTimeSetHour"
+                id="TokenRewardRateTimeSetHour"
+                className="p-2 bg-[#544] rounded drop-shadow-lg w-[20%] font-bold"
+              />
+
+              <input
+                type="number"
+                max="60"
+                min="0"
+                placeholder="M"
+                name="TokenRewardRateTimeSetMin"
+                id="TokenRewardRateTimeSetMin"
+                className="p-2 bg-[#544] rounded drop-shadow-lg w-[20%] font-bold"
+              />
+            </div>
           </label>
 
           <button className="p-3 bg-[#444] hover:bg-[#111] font-bold rouded drop-shadow-lg text-white">
             Create
           </button>
         </form>
+
       </dialog>
+
     </div>
   );
 };

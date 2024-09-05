@@ -8,29 +8,29 @@ interface FaucetDataSyfinProp {
 
 const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
   const ref = useRef<any>("");
+  const fHour = useRef<number>(0);
+  const fMinute = useRef<number>(0);
 
   // recoursive
-  const FucetCoundown = (timeRemaining: number) => {
-    let test = timeRemaining.toString().includes("h");
+  const FucetCoundown = (timeSet: string) => {
+    let testH = timeSet.toString().split("H")[0];
+    let testM: any = timeSet.toString().split(" ")[1];
+    testM = [testM].toString().split("M")[0];
 
-    if (test) {
-      // Get the timeset in hours
-      const date = new Date(Number(timeRemaining));
-
-      // Time calculations for days, hours, minutes and seconds
-      let hours = date.getHours();
-      let minutes = date.getMinutes();
-      let seconds = date.getSeconds();
-
-      // If the count down is finished, write some text
-      if (timeRemaining < 0) {
-        clearInterval(0);
-        return "EXPIRED";
-      }
-
-      // Display the result in the element with id="demo"
-      return hours + "h " + minutes + "m " + seconds + "s ";
+    if (Number(testH) === 0 && Number(testM) === 0) {
+      return "EXPIRED";
     }
+
+    console.log(testH + "h " + testM + "m ");
+
+    while (Number(testM) > 0) {
+      fMinute.current = Number(testM) - 1;
+    }
+    while (Number(testH) > 0) {
+      fHour.current = Number(testH) - 1;
+      fMinute.current = +60;
+    }
+
   };
 
   useEffect(() => {
@@ -39,6 +39,7 @@ const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
 
     return () => clearInterval(intervalId);
   }, [ref]);
+
 
   return (
     <ul className=" bg-[#6C4675] ">
@@ -49,12 +50,17 @@ const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
             className="flex items-center justify-between w-full p-2"
           >
             <li>{item.token}</li>
-            <li>{Math.ceil(item.timeSet / 60)} H</li>
+            <li>{item.faucetWaitTime} </li>
             <li>{item.amount}</li>
-            <li>
-              {ref.current !== "EXPIRED"
-                ? FucetCoundown(item.faucetWaitTime)
-                : "EXPIRED"}
+            <li className="w-[100px]">
+              <p className="flex items-center justify-between">
+                <span>hours:</span>
+                {fHour.current}
+              </p>
+              <p className="flex items-center justify-between">
+                <span>minute:</span>
+                {fMinute.current}
+              </p>
             </li>
 
             <li>
