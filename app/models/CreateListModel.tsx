@@ -28,8 +28,6 @@ const CreateListModel = () => {
     try {
       console.log("kil yourself", user[0]);
 
-  
-
       // await HandleUserBigPost({
       //   account: 90,
       //   TokenBuyAmount: 0,
@@ -37,16 +35,14 @@ const CreateListModel = () => {
       //   TokenIn: 0,
       // });
 
-      console.log(form[0].checked);
-      console.log(form[1].checked);
-      console.log(form[2].checked);
-      console.log(form[3].checked);
-      console.log(form[4].checked);
+      console.log((form[0] as any).checked);
+      console.log((form[1] as any).checked);
+      console.log((form[2] as any).checked);
+      console.log((form[3] as any).checked);
+      console.log((form[4] as any).checked);
 
-      
-
-      console.log(form[5].value);
-      console.log(form[6].value);
+      console.log((form[5] as any).value);
+      console.log((form[6] as any).value);
 
       router.refresh();
       onClose();
