@@ -40,8 +40,9 @@ export const HandleStupidFaucetAddition = async (data: FormData) => {
 
    const stupidData = new StupidFuckingFaucetTokenAddition({
       token: ClientStupidFuckingData.TokenContractName as string,
-      tokenSYMBOL: ClientStupidFuckingData.TokenContractSymbol as string,
+      tokenSYMBOL: ClientStupidFuckingData.TokenContractSymbol as string,             
       tokenAddress: ClientStupidFuckingData.TokenContract as string,
+      faucetWaitTime: Date.now(),
       amount: ClientStupidFuckingData.TokenDistrubute,
       RewardRate: ClientStupidFuckingData.TokenRewardRate,
       timeSet: ClientStupidFuckingData.TokenRewardRateTimeSet,

@@ -10,8 +10,9 @@ const MainHeader = () => {
   // TODO GET USER SETUP
 
   const [toggle, setToggle] = useState(false);
+  const [handleToggle, setHandleToggle] = useState<boolean>(false);
   const [userHandle, setUserHandle] = useState<string>("");
-  const [userVerified, setUserVerified] = useState<boolean>(false)
+  const [userVerified, setUserVerified] = useState<boolean>(false);
 
   const HandleMEtaUserClient = async () => {
     try {
@@ -28,10 +29,10 @@ const MainHeader = () => {
       const messageCheck = verifyMessage(message, signedMessage);
 
       if (messageCheck.toLowerCase() === userHandle.toLowerCase()) {
-        setUserVerified(true)
+        setUserVerified(true);
         toast("user verified");
       } else {
-        toast("Please double check your current account")
+        toast("Please double check your current account");
       }
 
       console.log(signedMessage, "message verification");
@@ -56,7 +57,7 @@ const MainHeader = () => {
     <header className=" relative z-20 flex flex-col gap-10 w-full">
       <div className="flex items-center justify-between">
         {isLogged ? (
-          <h1 className="text-2xl font-bold">Hello mother fucker</h1>
+          <h1 className="text-2xl font-bold">Hello, {`${userHandle}`}</h1>
         ) : (
           <h1 className="text-2xl font-bold">5ehopswa</h1>
         )}
@@ -92,31 +93,69 @@ const MainHeader = () => {
         )}
       </div>
 
-      <nav className="w-[90%] mx-auto flex justify-around items-center drop-shadow-lg bg-[#f0f8ff37] p-5 rounded">
+      <nav className="hidden md:block w-[90%] mx-auto drop-shadow-lg bg-[#f0f8ff37] p-5 rounded flex justify-between items-center">
         <Link
           href="/bidUp"
           className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666]"
         >
-          Want to bleed.
+          Unload
         </Link>
         <Link
           href="/faucet"
           className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666]"
         >
-          want to die.
+          ChampagneShower
         </Link>
         <Link
-          href="/"
+          href="/melihoper"
           className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666]"
         >
-          Need sucide.
+          Melihoper
         </Link>
         <Link
-          href="/"
+          href="/xxx"
           className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666]"
         >
           Want to sell your soul.
         </Link>
+      </nav>
+
+      <nav className="relative md:hidden w-[90%] mx-auto  drop-shadow-lg  p-5 rounded ">
+        <button
+          onClick={() => setHandleToggle((prev) => !prev)}
+          className="absolute -top-9 right-0 text-4xl z-20"
+        >
+          ⬇️
+        </button>
+        
+        {handleToggle && (
+          <div className="flex flex-col justify-around items-center bg-[#f0f8ff37] gap-5 p-5 rounded drop-shadow-lg w-full">
+            <Link
+              href="/bidUp"
+              className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666] w-full"
+            >
+              Unload
+            </Link>
+            <Link
+              href="/faucet"
+              className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666] w-full"
+            >
+              ChampagneShower
+            </Link>
+            <Link
+              href="/melihoper"
+              className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666] w-full"
+            >
+              Melihoper
+            </Link>
+            <Link
+              href="/xxx"
+              className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666] w-full"
+            >
+              Want to sell your soul.
+            </Link>
+          </div>
+        )}
       </nav>
     </header>
   );

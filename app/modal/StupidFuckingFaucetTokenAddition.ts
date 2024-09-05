@@ -6,6 +6,7 @@ export interface IStupidFuckingFaucetTokenAdditionModal {
   RewardRate: number;
   tokenSYMBOL: string;
   tokenAddress: string;
+  faucetWaitTime: number;
   timeSet: number;
   tokenABI: string;
 }
@@ -17,6 +18,9 @@ const StupidFuckingFaucetTokenAdditionSchema =
     {
       token: {
         type: String,
+      },
+      faucetWaitTime: {
+        type: Number
       },
       RewardRate: {
         type: Number,                                                                                

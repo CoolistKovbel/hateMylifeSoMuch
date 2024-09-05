@@ -15,13 +15,12 @@ const MotherFuckingTokenAddModal = () => {
     try {
       console.log("handling the stupid request.");
       const res = await HandleStupidFaucetAddition(data);
-        if(res.status === "Success") {
-            toast("There was a success")
-            console.log(res.payload)
-        }
+      if (res.status === "Success") {
+        toast("There was a success");
+        console.log(res.payload);
+      }
 
-
-        onClose()
+      onClose();
     } catch (error) {
       toast(
         "Stupid fucking error accured, cant fucking add a fucking token you stupid fucking dipshit."
@@ -31,19 +30,19 @@ const MotherFuckingTokenAddModal = () => {
 
   return (
     <div
-      className={`fixed inset-0 flex items-center justify-center ${
+      className={`fixed inset-0 flex items-center justify-center z-20 ${
         isModalOpen ? "block" : "hidden"
       }`}
     >
-      <div
-        className="fixed inset-0 bg-black opacity-50"
-        onClick={onClose}
-      ></div>
+      <div className="fixed inset-0 bg-black opacity-50" onClick={onClose}>
+        x
+      </div>
 
       <dialog
         open={isModalOpen}
         className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
       >
+        
         <header className="p-5">
           <h2 className="text-2xl">Add Token To Fucking Faucet</h2>
           <p className="text-sm text-gray-500 p-4 italic">
@@ -56,6 +55,7 @@ const MotherFuckingTokenAddModal = () => {
           onSubmit={onSubmit}
           className="flex flex-col gap-5 bg-[#666] p-10 rounded drop-shadow-lg overflow-auto h-[500px]"
         >
+
           <label htmlFor="TokenContract" className="flex flex-col gap-3">
             <span className="text-xl font-bold">Token Contract:</span>
             <input
@@ -125,7 +125,9 @@ const MotherFuckingTokenAddModal = () => {
             htmlFor="TokenRewardRateTimeSet"
             className="flex flex-col gap-3"
           >
-            <span className="text-xl font-bold">Token Reward Rate: (minutes)</span>
+            <span className="text-xl font-bold">
+              Token Reward Rate: (multiple by 60 before)
+            </span>
             <input
               type="number"
               placeholder="Set the fucking fucet timer "

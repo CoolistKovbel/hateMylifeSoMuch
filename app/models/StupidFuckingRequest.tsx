@@ -10,10 +10,6 @@ const StupidFuckingRequest = () => {
   const onSubmit = async () => {
     try {
       console.log("handling the stupid request.");
-
-    
-
-
     } catch (error) {
       toast(
         "Stupid fucking error accured, cant fucking add a fucking token you stupid fucking dipshit."
@@ -22,14 +18,14 @@ const StupidFuckingRequest = () => {
   };
   return (
     <div
-      className={`fixed inset-0 flex items-center justify-center ${
+      className={`fixed inset-0 flex items-center justify-center z-20 ${
         isModalOpen ? "block" : "hidden"
       }`}
     >
       <div
-        className="fixed inset-0 bg-black opacity-50"
+        className="fixed inset-0 bg-black opacity-50 "
         onClick={onClose}
-      ></div>
+      >x</div>
 
       <dialog
         open={isModalOpen}

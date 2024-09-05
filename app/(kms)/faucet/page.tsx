@@ -8,8 +8,9 @@ const Page = async () => {
 
   return (
     <section>
+      
       <header className="p-10 text-center">
-        <h2 className="text-6xl font-bold">Want to die</h2>
+        <h2 className="text-6xl font-bold mb-6">Want to die</h2>
         <p className="text-gray-500 text-md">
           Request a verity of tokens that get uploaded to our system
         </p>

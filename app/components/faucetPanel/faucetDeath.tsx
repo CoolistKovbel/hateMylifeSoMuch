@@ -35,7 +35,7 @@ const FaucetDeath = () => {
       <h2 className="text-4xl font-bold bg-[#222] p-2 underline rounded drop-shadow-lg">
         KMS faucet
       </h2>
-      <div className="w-[20%] flex items-center justify-between">
+      <div className="w-[25%] flex items-center justify-between">
         <button
           className="p-2 uppercase bg-emerald-500 text-white font-bold rounded drop-shadow-lg hover:bg-emerald-200"
           onClick={HandleAddingAFuckingTokenToTheFuckingFaucetMotherFucker}
