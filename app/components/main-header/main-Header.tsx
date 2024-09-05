@@ -1,13 +1,56 @@
 "use client";
+
+import { ethers } from "ethers";
+import { verifyMessage } from "ethers/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const MainHeader = () => {
   // TODO GET USER SETUP
 
   const [toggle, setToggle] = useState(false);
+  const [userHandle, setUserHandle] = useState<string>("");
+  const [userVerified, setUserVerified] = useState<boolean>(false)
+
+  const HandleMEtaUserClient = async () => {
+    try {
+      console.log("handle user client");
+
+      const provider = new ethers.providers.Web3Provider(
+        (window as any).ethereum
+      );
+      const requestAccount = await provider.send("eth_requestAccounts", []);
+      const message = "You are the current account holder logging in today.";
+      const signer = provider.getSigner();
+      const signedMessage = await signer.signMessage(message);
+
+      const messageCheck = verifyMessage(message, signedMessage);
+
+      if (messageCheck.toLowerCase() === userHandle.toLowerCase()) {
+        setUserVerified(true)
+        toast("user verified");
+      } else {
+        toast("Please double check your current account")
+      }
+
+      console.log(signedMessage, "message verification");
+      console.log(messageCheck.toLowerCase(), "message verification2");
+      console.log(userHandle.toLowerCase(), "message verification3");
+
+      setUserHandle(requestAccount[0]);
+    } catch (error) {
+      toast(
+        "Sorry please install metamask or make sure you are logged into it"
+      );
+    }
+  };
 
   const isLogged = false;
+
+  console.log("the current data", {
+    userHandle,
+  });
 
   return (
     <header className=" relative z-20 flex flex-col gap-10 w-full">
@@ -26,7 +69,10 @@ const MainHeader = () => {
             ____ ↓
           </div>
         ) : (
-          <button className="bg-[#111] p-2 hover:bg-[#333] rounded drop-shadow-lg">
+          <button
+            onClick={HandleMEtaUserClient}
+            className="bg-[#111] p-2 hover:bg-[#333] rounded drop-shadow-lg"
+          >
             Connect with metamask
           </button>
         )}
