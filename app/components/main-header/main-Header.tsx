@@ -93,7 +93,7 @@ const MainHeader = () => {
         )}
       </div>
 
-      {/* <nav className="hidden md:block w-[90%] mx-auto drop-shadow-lg bg-[#f0f8ff37] p-5 rounded flex justify-between items-center">
+      <nav className="hidden md:block w-[90%] mx-auto drop-shadow-lg bg-[#f0f8ff37] p-5 rounded flex justify-between items-center">
         <Link
           href="/bidUp"
           className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666]"
@@ -156,7 +156,7 @@ const MainHeader = () => {
             </Link>
           </div>
         )}
-      </nav> */}
+      </nav>
 
 
     </header>

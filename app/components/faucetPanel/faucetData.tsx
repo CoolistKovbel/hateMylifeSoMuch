@@ -13,10 +13,6 @@ const FaucetData = ({ AllFucets }: FacuetDataProps) => {
     toast("There are no faucets avaible");
   }
 
-
-
-  // fucetCoundown(400)
-
   return (
     <div className="flex flex-col gap-2 w-[65%] mx-auto bg-[#AF2B1E] p-4 rounded drop-shadow-lg drop-shadow-lg">
       {/* header */}

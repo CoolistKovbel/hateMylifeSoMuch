@@ -13,7 +13,6 @@ const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
 
   // recoursive
   const FucetCoundown = (timeSet: string) => {
-    console.log(timeSet);
     let testH = timeSet.split("H")[0];
     let testM: any = timeSet.split(" ")[1];
     testM = [testM].toString().split("M")[0];
@@ -22,24 +21,16 @@ const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
       return "EXPIRED";
     }
 
-    
     while (Number(testM) > 0) {
       fMinute.current = Number(testM) - 1;
       console.log(testH + "h " + testM + "m ");
     }
     while (Number(testH) > 0) {
       fHour.current = Number(testH) - 1;
-      fMinute.current =+ 60;
+      fMinute.current = +60;
       console.log(testH + "h " + testM + "m ");
     }
   };
-
-  useEffect(() => {
-    let intervalId = setInterval(FucetCoundown, 1000);
-    ref.current = intervalId;
-
-    return () => clearInterval(intervalId);
-  }, [ref]);
 
   return (
     <ul className=" bg-[#6C4675] ">
@@ -56,11 +47,11 @@ const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
             <li className="w-[100px]">
               <p className="flex items-center justify-between">
                 <span>hours:</span>
-                {fHour.current || FucetCoundown(item.faucetWaitTime)}
+                {fHour.current}
               </p>
               <p className="flex items-center justify-between">
                 <span>minute:</span>
-                {fMinute.current || FucetCoundown(item.faucetWaitTime)}
+                {fMinute.current}
               </p>
             </li>
 
