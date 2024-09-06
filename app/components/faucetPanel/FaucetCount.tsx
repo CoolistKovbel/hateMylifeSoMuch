@@ -2,16 +2,14 @@ import { useEffect, useState } from "react";
 
 interface FacuetCountProps {
   faucetWaitTime: any;
+  validClaim: any;
 }
 
-const FaucetCount = ({ faucetWaitTime }: FacuetCountProps) => {
+const FaucetCount = ({ faucetWaitTime, validClaim }: FacuetCountProps) => {
   const count = faucetWaitTime.split(" ");
 
   const [hour, setHour] = useState<any>(Number(count[0].split("H")[0]));
   const [minute, setMinute] = useState<any>(Number(count[1].split("M")[0]));
-
-  console.log(minute, "current minute");
-  console.log(hour, "current hour");
 
   function countFunc() {
     // inlizlizing count down
@@ -45,13 +43,13 @@ const FaucetCount = ({ faucetWaitTime }: FacuetCountProps) => {
         if (prev === 0) {
           if (minute > 0) {
             // give remainder
-            setMinute((prev:any) => {
+            setMinute((prev: any) => {
               if (prev + 59 > 60) {
                 return prev + 59 - 60;
               }
             });
             // set reminder
-            return 1;
+            return prev + 1;
           }
 
           return 0;
@@ -62,10 +60,15 @@ const FaucetCount = ({ faucetWaitTime }: FacuetCountProps) => {
     } else {
       return null;
     }
+
+    if (hour === 0 && minute === 0) {
+      validClaim(false);
+      return null;
+    }
   }
 
   useEffect(() => {
-    const intervaleTimeset = setInterval(countFunc, 4000);
+    const intervaleTimeset = setInterval(countFunc, 60000);
     return () => clearInterval(intervaleTimeset);
   }, [hour, minute]);
 

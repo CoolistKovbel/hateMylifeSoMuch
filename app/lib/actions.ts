@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { BidsModal } from "../modal/BidsModal";
 import { Email } from "../modal/EmailModal";
 import { StupidFuckingFaucetTokenAddition } from "../modal/StupidFuckingFaucetTokenAddition";
@@ -51,6 +52,8 @@ export const HandleStupidFaucetAddition = async (data: FormData) => {
 
 
     await stupidData.save()
+
+    revalidatePath("/faucet")
 
     return {
       status: "Success",

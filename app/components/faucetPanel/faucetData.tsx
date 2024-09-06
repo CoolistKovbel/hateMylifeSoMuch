@@ -22,6 +22,7 @@ const FaucetData = ({ AllFucets }: FacuetDataProps) => {
         <li>Faucet waitTime:</li>
         <li>Faucet Timer:</li>
         <li>Facuet reward:</li>
+        <li>Facuet tokens left:</li>
         <li>Facuet claim:</li>
       </ul>
 
