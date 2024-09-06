@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface FacuetCountProps {
   faucetWaitTime: any;
@@ -6,7 +6,6 @@ interface FacuetCountProps {
 
 const FaucetCount = ({ faucetWaitTime }: FacuetCountProps) => {
   const count = faucetWaitTime.split(" ");
-  console.log(count, "the count down");
 
   const [hour, setHour] = useState<any>(Number(count[0].split("H")[0]));
   const [minute, setMinute] = useState<any>(Number(count[1].split("M")[0]));
@@ -18,11 +17,51 @@ const FaucetCount = ({ faucetWaitTime }: FacuetCountProps) => {
     // inlizlizing count down
     console.log("inizilizeing count");
 
-    while (hour >= 0) {
-      setHour((prev: any) => prev - 1);
+    if (hour >= 1) {
+      setMinute((prev: any) => {
+        if (prev === 0) {
+          return 60;
+        } else {
+          return prev - 1;
+        }
+      });
+    } else {
+      setMinute((prev: any) => {
+        if (prev === 0) {
+          if (hour === 0) {
+            return 0;
+          } else {
+            return prev - 1;
+          }
+        } else {
+          return prev - 1;
+        }
+      });
+      return null;
     }
 
-    setMinute((prev: any) => prev - 1);
+    if (minute >= 1) {
+      setHour((prev: any) => {
+        if (prev === 0) {
+          if (minute > 0) {
+            // give remainder
+            setMinute((prev:any) => {
+              if (prev + 59 > 60) {
+                return prev + 59 - 60;
+              }
+            });
+            // set reminder
+            return 1;
+          }
+
+          return 0;
+        } else {
+          return prev - 1;
+        }
+      });
+    } else {
+      return null;
+    }
   }
 
   useEffect(() => {
