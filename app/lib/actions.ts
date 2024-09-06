@@ -141,9 +141,38 @@ export const HandleFaucetCountdownReset = async (
   try {
     await dbConnect();
 
-    await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(faucetID, {
-      $inc: { faucetLaps: lap + 1 },
-    });
+    const res = await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(
+      faucetID,
+      {
+        $inc: { faucetLaps: lap + 1, faucetClaim: 1 },
+      }
+    );
+
+    console.log(res);
+
+    return {
+      status: "success",
+      payload: "",
+    };
+  } catch (error) {
+    return {
+      status: "error",
+      payload: error,
+    };
+  }
+};
+
+export const HandleFaucetToggle = async (faucetId: string) => {
+  try {
+    await dbConnect();
+
+    const gg: any = await StupidFuckingFaucetTokenAddition.findById(faucetId);
+
+    if (gg.faucetClaim > 0) {
+      gg?.faucetClaim - 1;
+    }
+
+    await gg.save();
 
     return {
       status: "success",

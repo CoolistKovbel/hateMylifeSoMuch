@@ -1,7 +1,7 @@
 import { AddActoin, HandleFaucetCountdownReset } from "@/app/lib/actions";
 import dbConnect from "@/app/lib/db";
 import { StupidFuckingFaucetTokenAddition } from "@/app/modal/StupidFuckingFaucetTokenAddition";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 interface FacuetCountProps {
@@ -10,6 +10,7 @@ interface FacuetCountProps {
   faucetId: string;
   remainingCountdown: string;
   fuacetLap: number;
+  statusClaim: boolean;
 }
 
 const FaucetCount = ({
@@ -18,7 +19,9 @@ const FaucetCount = ({
   faucetId,
   remainingCountdown,
   fuacetLap,
+  statusClaim
 }: FacuetCountProps) => {
+  const ref = useRef<any>();
   const count = faucetWaitTime.split(" ");
   const remainingCount = remainingCountdown.split(" ");
 
@@ -30,10 +33,9 @@ const FaucetCount = ({
   );
 
   async function countFunc() {
-    // inlizlizing count down
-    console.log("inizilizeing count");
 
     if (minute !== 0 || hour !== 0) {
+
       hour >= 0 ? setMinute((prev: any) => prev - 1) : null;
 
       if (hour > 0 && minute === 0) {
@@ -41,17 +43,16 @@ const FaucetCount = ({
 
         setMinute(60);
       }
+
     } else {
       if (hour === 0 && minute === 0) {
         console.log("nice you lappsed", faucetId);
         validClaim(false);
-        await HandleFaucetCountdownReset(faucetId, fuacetLap);
+        const gg = await HandleFaucetCountdownReset(faucetId, fuacetLap);
+        console.log(gg)
+        clearInterval(ref.current);
       }
     }
-
-    // Setting data
-    console.log(`====== Remaing time =====`);
-    console.log(`${hour}H ${minute}M`);
 
     await AddActoin({
       currentFaucetId: faucetId,
@@ -60,16 +61,15 @@ const FaucetCount = ({
   }
 
   useEffect(() => {
-    const intervaleTimeset = setInterval(countFunc, 800);
+    ref.current = setInterval(countFunc, 800);
 
     if (hour === 0 && minute === 0) {
       toast("nice you lappsed");
       validClaim(false);
     }
 
-    return () => clearInterval(intervaleTimeset);
-    
-  }, [hour, minute]);
+    return () => clearInterval(ref.current);
+  }, [hour, minute, statusClaim]);
 
   return (
     <li className="w-[100px]">

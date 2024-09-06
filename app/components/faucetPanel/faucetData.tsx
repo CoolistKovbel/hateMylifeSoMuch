@@ -10,7 +10,7 @@ const FaucetData = ({ AllFucets }: FacuetDataProps) => {
   let stupidFuckingData: any = JSON.parse(AllFucets).payload || [];
 
   if (AllFucets.status === "error" || stupidFuckingData.length === 0) {
-    toast("There are no faucets avaible");
+    console.log("There are no faucets avaible");
   }
 
   return (

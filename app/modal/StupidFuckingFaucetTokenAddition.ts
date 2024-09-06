@@ -11,6 +11,7 @@ export interface IStupidFuckingFaucetTokenAdditionModal {
   timeSet: number;
   tokenABI: string;
   faucetLaps: number;
+  faucetClaim: number;
 }
 
 // TODO: Make it better......
@@ -50,6 +51,10 @@ const StupidFuckingFaucetTokenAdditionSchema =
       tokenABI: {
         type: String,
       },
+      faucetClaim: {
+        type: Number,
+        default: 0
+      }
     },
     { timestamps: true }
   );
