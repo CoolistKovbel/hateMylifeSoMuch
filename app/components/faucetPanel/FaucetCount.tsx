@@ -1,70 +1,68 @@
+import dbConnect from "@/app/lib/db";
+import { StupidFuckingFaucetTokenAddition } from "@/app/modal/StupidFuckingFaucetTokenAddition";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 interface FacuetCountProps {
   faucetWaitTime: any;
   validClaim: any;
+  faucetId: string;
 }
 
-const FaucetCount = ({ faucetWaitTime, validClaim }: FacuetCountProps) => {
+type AddActoinProps = {
+  currentFaucetId: string;
+  Timepayload: string;
+};
+
+const AddActoin = async ({ currentFaucetId, Timepayload }: AddActoinProps) => {
+  try {
+    await dbConnect();
+
+    console.log(currentFaucetId, Timepayload);
+
+    // await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(currentFaucetId, {
+    //     faucetCountDownRemains: Timepayload
+    // })
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
+const FaucetCount = ({
+  faucetWaitTime,
+  validClaim,
+  faucetId,
+}: FacuetCountProps) => {
   const count = faucetWaitTime.split(" ");
 
   const [hour, setHour] = useState<any>(Number(count[0].split("H")[0]));
   const [minute, setMinute] = useState<any>(Number(count[1].split("M")[0]));
 
-  function countFunc() {
+  async function countFunc() {
     // inlizlizing count down
     console.log("inizilizeing count");
 
-    if (hour >= 1) {
-      setMinute((prev: any) => {
-        if (prev === 0) {
-          return 60;
-        } else {
-          return prev - 1;
-        }
-      });
+    if (minute !== 0 || hour !== 0) {
+      hour >= 0 ? setMinute((prev: any) => prev - 1) : null;
+
+      if (hour > 0 && minute === 0) {
+        setHour((prev: any) => prev - 1);
+
+        setMinute(60);
+      }
     } else {
-      setMinute((prev: any) => {
-        if (prev === 0) {
-          if (hour === 0) {
-            return 0;
-          } else {
-            return prev - 1;
-          }
-        } else {
-          return prev - 1;
-        }
-      });
-      return null;
+      if (hour === 0 && minute === 0) {
+        validClaim(false);
+      }
     }
 
-    if (minute >= 1) {
-      setHour((prev: any) => {
-        if (prev === 0) {
-          if (minute > 0) {
-            // give remainder
-            setMinute((prev: any) => {
-              if (prev + 59 > 60) {
-                return prev + 59 - 60;
-              }
-            });
-            // set reminder
-            return prev + 1;
-          }
-
-          return 0;
-        } else {
-          return prev - 1;
-        }
-      });
-    } else {
-      return null;
-    }
-
-    if (hour === 0 && minute === 0) {
-      validClaim(false);
-      return null;
-    }
+    // Setting data
+    console.log(`====== Remaing time =====`);
+    toast(`${hour}H ${minute}M`);
+    await AddActoin({
+      currentFaucetId: faucetId,
+      Timepayload: `${hour}H ${minute}M`,
+    });
   }
 
   useEffect(() => {

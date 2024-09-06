@@ -14,6 +14,8 @@ const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
     console.log("handling claim")
   }
 
+  
+
   return (
     <ul className=" bg-[#6C4675] ">
       {stupidFuckingData &&
@@ -24,7 +26,7 @@ const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
           >
             <li>{item.token}</li>
             <li>{item.faucetWaitTime} </li>
-            <FaucetCount faucetWaitTime={item.faucetWaitTime} validClaim={setValidClaim} />
+            <FaucetCount faucetWaitTime={item.faucetWaitTime} validClaim={setValidClaim} faucetId={stupidFuckingData._id} />
             <li>{item.RewardRate}</li>
             <li>{item.amount}</li>
             <li>
