@@ -7,7 +7,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="p-10">
+    <main className="p-10 flex flex-col justify-between">
       <MainHeader />
       {children}
       <MainFooter />
