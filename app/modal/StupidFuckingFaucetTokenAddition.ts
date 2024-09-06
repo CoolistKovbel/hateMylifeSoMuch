@@ -10,6 +10,7 @@ export interface IStupidFuckingFaucetTokenAdditionModal {
   faucetCountDownRemains: string;
   timeSet: number;
   tokenABI: string;
+  faucetLaps: number;
 }
 
 // TODO: Make it better......
@@ -23,8 +24,13 @@ const StupidFuckingFaucetTokenAdditionSchema =
       faucetWaitTime: {
         type: String,
       },
+      faucetLaps: {
+        type: Number,
+        default: 0
+      },
       faucetCountDownRemains: {
         type: String,
+        default: "0H 0M"
       },
       RewardRate: {
         type: Number,

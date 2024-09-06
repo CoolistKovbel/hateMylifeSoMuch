@@ -5,6 +5,7 @@ import React from "react";
 
 const Page = async () => {
   const StupidFaucets = await HandleGetAllTheFuckingFucets();
+  
 
   return (
     <section>

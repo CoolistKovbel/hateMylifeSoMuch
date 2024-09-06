@@ -39,21 +39,20 @@ export const HandleStupidFaucetAddition = async (data: FormData) => {
     // handle server
     await dbConnect();
 
-   const stupidData = new StupidFuckingFaucetTokenAddition({
+    const stupidData = new StupidFuckingFaucetTokenAddition({
       token: ClientStupidFuckingData.TokenContractName as string,
-      tokenSYMBOL: ClientStupidFuckingData.TokenContractSymbol as string,             
+      tokenSYMBOL: ClientStupidFuckingData.TokenContractSymbol as string,
       tokenAddress: ClientStupidFuckingData.TokenContract as string,
       faucetWaitTime: `${ClientStupidFuckingData.TokenRewardRateTimeSetHour}H ${ClientStupidFuckingData.TokenRewardRateTimeSetMin}M`,
       amount: ClientStupidFuckingData.TokenDistrubute,
       RewardRate: ClientStupidFuckingData.TokenRewardRate,
       timeSet: ClientStupidFuckingData.TokenRewardRateTimeSet,
-      tokenABI: ClientStupidFuckingData.TokenContractABI as string
+      tokenABI: ClientStupidFuckingData.TokenContractABI as string,
     });
 
+    await stupidData.save();
 
-    await stupidData.save()
-
-    revalidatePath("/faucet")
+    revalidatePath("/faucet");
 
     return {
       status: "Success",
@@ -69,48 +68,91 @@ export const HandleStupidFaucetAddition = async (data: FormData) => {
 
 export const HandleGetAllTheFuckingFucets = async () => {
   try {
-    console.log('handling the fucking fuects')
+    console.log("handling the fucking fuects");
 
+    await dbConnect();
 
-    await dbConnect()
+    const fuckingStupidData = await StupidFuckingFaucetTokenAddition.find({});
 
-
-    const fuckingStupidData = await StupidFuckingFaucetTokenAddition.find({})
-
-    
     return {
       status: "success",
-      payload: fuckingStupidData
-    }
+      payload: fuckingStupidData,
+    };
   } catch (error) {
     return {
       status: "error",
-      payload: error
-    }
+      payload: error,
+    };
   }
-}
+};
 
 // Set user email in mailing list
-export const handleUserEmailMailinglist = async ( email: string ) => {
+export const handleUserEmailMailinglist = async (email: string) => {
   try {
-    
-    await dbConnect()
+    await dbConnect();
 
     const e = new Email({
-      email
-    })
+      email,
+    });
 
-    e.save()
-
+    e.save();
 
     return {
       status: "success",
-      payload: "user is on the mailing list"
-    }
+      payload: "user is on the mailing list",
+    };
   } catch (error) {
     return {
       status: "error",
-      payload: error
-    }
+      payload: error,
+    };
   }
-}
+};
+
+type AddActoinProps = {
+  currentFaucetId: string;
+  Timepayload: string;
+};
+
+export const AddActoin = async ({
+  currentFaucetId,
+  Timepayload,
+}: AddActoinProps) => {
+  try {
+    await dbConnect();
+
+    console.log(currentFaucetId, Timepayload);
+
+    await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(currentFaucetId, {
+      faucetCountDownRemains: Timepayload,
+    });
+  } catch (error) {
+    return {
+      status: "error",
+      payload: error,
+    };
+  }
+};
+
+export const HandleFaucetCountdownReset = async (
+  faucetID: string,
+  lap: number
+) => {
+  try {
+    await dbConnect();
+
+    await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(faucetID, {
+      $inc: { faucetLaps: lap + 1 },
+    });
+
+    return {
+      status: "success",
+      payload: "",
+    };
+  } catch (error) {
+    return {
+      status: "error",
+      payload: error,
+    };
+  }
+};

@@ -113,6 +113,7 @@ const MotherFuckingTokenAddModal = () => {
             <span className="text-xl font-bold">Token Reward Rate:</span>
             <input
               type="number"
+              step=".01"
               placeholder="Set the fucking reward rate "
               name="TokenRewardRate"
               id="TokenRewardRate"

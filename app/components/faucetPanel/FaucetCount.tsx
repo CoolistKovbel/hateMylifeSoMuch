@@ -1,3 +1,4 @@
+import { AddActoin, HandleFaucetCountdownReset } from "@/app/lib/actions";
 import dbConnect from "@/app/lib/db";
 import { StupidFuckingFaucetTokenAddition } from "@/app/modal/StupidFuckingFaucetTokenAddition";
 import { useEffect, useState } from "react";
@@ -7,36 +8,26 @@ interface FacuetCountProps {
   faucetWaitTime: any;
   validClaim: any;
   faucetId: string;
+  remainingCountdown: string;
+  fuacetLap: number;
 }
-
-type AddActoinProps = {
-  currentFaucetId: string;
-  Timepayload: string;
-};
-
-const AddActoin = async ({ currentFaucetId, Timepayload }: AddActoinProps) => {
-  try {
-    await dbConnect();
-
-    console.log(currentFaucetId, Timepayload);
-
-    // await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(currentFaucetId, {
-    //     faucetCountDownRemains: Timepayload
-    // })
-  } catch (error) {
-    console.log("error", error);
-  }
-};
 
 const FaucetCount = ({
   faucetWaitTime,
   validClaim,
   faucetId,
+  remainingCountdown,
+  fuacetLap,
 }: FacuetCountProps) => {
   const count = faucetWaitTime.split(" ");
+  const remainingCount = remainingCountdown.split(" ");
 
-  const [hour, setHour] = useState<any>(Number(count[0].split("H")[0]));
-  const [minute, setMinute] = useState<any>(Number(count[1].split("M")[0]));
+  const [hour, setHour] = useState<any>(
+    Number(remainingCount[0].split("H")[0]) || Number(count[0].split("H")[0])
+  );
+  const [minute, setMinute] = useState<any>(
+    Number(remainingCount[1].split("M")[0]) || Number(count[1].split("M")[0])
+  );
 
   async function countFunc() {
     // inlizlizing count down
@@ -52,13 +43,16 @@ const FaucetCount = ({
       }
     } else {
       if (hour === 0 && minute === 0) {
+        console.log("nice you lappsed", faucetId);
         validClaim(false);
+        await HandleFaucetCountdownReset(faucetId, fuacetLap);
       }
     }
 
     // Setting data
     console.log(`====== Remaing time =====`);
-    toast(`${hour}H ${minute}M`);
+    console.log(`${hour}H ${minute}M`);
+
     await AddActoin({
       currentFaucetId: faucetId,
       Timepayload: `${hour}H ${minute}M`,
@@ -66,8 +60,15 @@ const FaucetCount = ({
   }
 
   useEffect(() => {
-    const intervaleTimeset = setInterval(countFunc, 60000);
+    const intervaleTimeset = setInterval(countFunc, 800);
+
+    if (hour === 0 && minute === 0) {
+      toast("nice you lappsed");
+      validClaim(false);
+    }
+
     return () => clearInterval(intervaleTimeset);
+    
   }, [hour, minute]);
 
   return (
