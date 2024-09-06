@@ -28,7 +28,7 @@ const MainHeader = () => {
 
       const messageCheck = verifyMessage(message, signedMessage);
 
-      if (messageCheck.toLowerCase() === userHandle.toLowerCase()) {
+      if (messageCheck.toLowerCase() === requestAccount[0].toLowerCase()) {
         setUserVerified(true);
         toast("user verified");
       } else {
@@ -47,10 +47,11 @@ const MainHeader = () => {
     }
   };
 
-  const isLogged = false;
+  const isLogged = userVerified;
 
   console.log("the current data", {
     userHandle,
+    userVerified,
   });
 
   return (
@@ -59,7 +60,9 @@ const MainHeader = () => {
         {isLogged ? (
           <h1 className="text-2xl font-bold">Hello, {`${userHandle}`}</h1>
         ) : (
-          <h1 className="text-2xl font-bold"><Link href="/">5ehopswa</Link></h1>
+          <h1 className="text-2xl font-bold">
+            <Link href="/">5ehopswa</Link>
+          </h1>
         )}
 
         {isLogged ? (
@@ -80,20 +83,35 @@ const MainHeader = () => {
 
         {toggle && (
           <div className="w-[300px] h-[300px] bg-[#222] rounded drop-shadow-lg absolute top-10 right-0 z-20 flex flex-col justify-between p-10">
-            <a className="w-full p-3 bg-[#666] hover:bg-[#555] font-bold">
+            <Link
+              href="/profile"
+              className="w-full p-3 bg-[#666] hover:bg-[#555] font-bold"
+            >
               Profile
-            </a>
-            <a className="w-full p-3 bg-[#666] hover:bg-[#555] font-bold">
+            </Link>
+            <Link
+              href="/message"
+              className="w-full p-3 bg-[#666] hover:bg-[#555] font-bold"
+            >
               death request
-            </a>
-            <a className="w-full p-3 bg-[#666] hover:bg-[#555] font-bold">
+            </Link>
+            <Link
+              href="/faucet"
+              className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666]"
+            >
+              ChampagneShower
+            </Link>
+            <button
+              onClick={() => toast("loggoing out later")}
+              className="w-full p-3 bg-[#666] hover:bg-[#555] font-bold"
+            >
               logout
-            </a>
+            </button>
           </div>
         )}
       </div>
 
-      <nav className="hidden md:block w-[90%] mx-auto drop-shadow-lg bg-[#f0f8ff37] p-5 rounded flex justify-between items-center">
+      {/* <nav className="hidden md:block w-[90%] mx-auto drop-shadow-lg bg-[#f0f8ff37] p-5 rounded flex justify-between items-center">
         <Link
           href="/bidUp"
           className="p-2 bg-[#455] rounded drop-shadow-lg hover:bg-[#666]"
@@ -156,9 +174,7 @@ const MainHeader = () => {
             </Link>
           </div>
         )}
-      </nav>
-
-
+      </nav> */}
     </header>
   );
 };
