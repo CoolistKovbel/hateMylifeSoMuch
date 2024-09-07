@@ -2,31 +2,36 @@
 import { useState } from "react";
 import FaucetCount from "./FaucetCount";
 import { HandleFaucetToggle } from "@/app/lib/actions";
+import { ethers } from "ethers";
 
 interface FaucetDataSyfinProp {
-  stupidFuckingData: any;
+  deData: any;
 }
 
-const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
-  const [validClaim, setValidClaim] = useState<boolean>(true);
+const FaucetDataSyfin = ({ deData }: FaucetDataSyfinProp) => {
+  const [validClaim, setValidClaim] = useState<boolean>(true); // faucet claim
+  const [validHandleClaim, setValidHandleClaim] = useState<boolean>(false); // facuet handle
+
 
   const handleClaim = async (faucetId: string, rewardrate: number) => {
     console.log("handling claim", faucetId);
-    console.log(`here is your reward +${rewardrate}`);
+    console.log(
+      `here is your reward +${ethers.utils.parseEther(rewardrate.toString())}`
+    );
 
     const res = await HandleFaucetToggle(faucetId);
-    if(res.status === "success") {
+
+    if (res.status === "success") {
       setValidClaim((prev) => !prev);
     }
+
   };
 
-  console.log(stupidFuckingData);
-  console.log(validClaim, "lap");
 
   return (
     <ul className=" bg-[#6C4675] ">
-      {stupidFuckingData &&
-        stupidFuckingData.map((item: any) => (
+      {deData &&
+        deData.map((item: any) => (
           <div
             key={crypto.randomUUID()}
             className="flex items-center justify-between w-full p-2"
@@ -40,6 +45,8 @@ const FaucetDataSyfin = ({ stupidFuckingData }: FaucetDataSyfinProp) => {
               validClaim={setValidClaim}
               statusClaim={validClaim}
               faucetId={item._id}
+              faucetHandleClaim={validHandleClaim} //bool
+              setHandleFaucet={setValidHandleClaim} 
             />
             <li>{item.RewardRate}</li>
             <li>{item.amount}</li>

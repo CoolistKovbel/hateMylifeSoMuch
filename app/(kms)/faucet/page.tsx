@@ -4,12 +4,11 @@ import { HandleGetAllTheFuckingFucets } from "@/app/lib/actions";
 import React from "react";
 
 const Page = async () => {
-  const StupidFaucets = await HandleGetAllTheFuckingFucets();
-  
+  const AllDeFaucets = await HandleGetAllTheFuckingFucets();
 
   return (
     <section>
-      
+
       <header className="p-10 text-center">
         <h2 className="text-6xl font-bold mb-6">Want to die</h2>
         <p className="text-gray-500 text-md">
@@ -17,14 +16,10 @@ const Page = async () => {
         </p>
       </header>
 
-      {/* I want you to die */}
-      {/* Wait for it */}
-
       <div>
         <FaucetDeath />
 
         <div className="text-center">
-          
           <select
             name="sortBy"
             id="sortBy"
@@ -36,11 +31,10 @@ const Page = async () => {
           </select>
 
           {/* faucet data */}
-          <FaucetData AllFucets={JSON.stringify(StupidFaucets)} />
+          <FaucetData AllFucets={JSON.stringify(AllDeFaucets)} />
+          
         </div>
       </div>
-
-
     </section>
   );
 };

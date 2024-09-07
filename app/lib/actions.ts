@@ -121,11 +121,53 @@ export const AddActoin = async ({
   try {
     await dbConnect();
 
+    console.log("======");
     console.log(currentFaucetId, Timepayload);
 
     await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(currentFaucetId, {
       faucetCountDownRemains: Timepayload,
     });
+  } catch (error) {
+    return {
+      status: "error",
+      payload: error,
+    };
+  }
+};
+
+
+/**
+ * 
+ * @param param0 
+ * @returns 
+ */
+export const KillingMyselfSlow = async ({
+  currentFaucetId,
+  Timepayload,
+}: AddActoinProps) => {
+  try {
+
+
+    console.log({ currentFaucetId, Timepayload })
+
+    await dbConnect()
+
+
+    await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(currentFaucetId, {
+      
+    })
+
+
+
+
+
+
+
+
+    return {
+      status: "success",
+      payload: "",
+    };
   } catch (error) {
     return {
       status: "error",
@@ -141,14 +183,9 @@ export const HandleFaucetCountdownReset = async (
   try {
     await dbConnect();
 
-    const res = await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(
-      faucetID,
-      {
-        $inc: { faucetLaps: lap + 1, faucetClaim: 1 },
-      }
-    );
-
-    console.log(res);
+    await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(faucetID, {
+      $inc: { faucetLaps: lap + 1, faucetClaim: 1 },
+    });
 
     return {
       status: "success",

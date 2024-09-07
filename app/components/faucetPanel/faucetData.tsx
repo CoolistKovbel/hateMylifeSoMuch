@@ -1,5 +1,4 @@
-import React from "react";
-import { toast } from "react-toastify";
+
 import FaucetDataSyfin from "./FaucetDataSyfin";
 
 interface FacuetDataProps {
@@ -7,6 +6,7 @@ interface FacuetDataProps {
 }
 
 const FaucetData = ({ AllFucets }: FacuetDataProps) => {
+
   let stupidFuckingData: any = JSON.parse(AllFucets).payload || [];
 
   if (AllFucets.status === "error" || stupidFuckingData.length === 0) {
@@ -27,7 +27,7 @@ const FaucetData = ({ AllFucets }: FacuetDataProps) => {
       </ul>
 
       {/* body */}
-      <FaucetDataSyfin stupidFuckingData={stupidFuckingData} />
+      <FaucetDataSyfin deData={stupidFuckingData} />
 
     </div>
   );
