@@ -12,7 +12,7 @@ const FaucetData = ({ AllFucets }: FacuetDataProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-2 w-[85%] mx-auto bg-[#000] p-4 rounded drop-shadow-lg drop-shadow-lg">
+    <div className="flex flex-col gap-2 w-[95%] mx-auto bg-[#000] p-4 rounded drop-shadow-lg drop-shadow-lg">
       {/* header */}
 
       <ul className="flex items-center justify-between w-full bg-[#111] p-2 text-sm">

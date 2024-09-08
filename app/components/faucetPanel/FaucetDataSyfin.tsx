@@ -10,6 +10,7 @@ interface FaucetDataSyfinProp {
 
 const FaucetDataSyfin = ({ deData }: FaucetDataSyfinProp) => {
   const [validClaim, setValidClaim] = useState<boolean>(true); // faucet claim
+
   const [validHandleClaim, setValidHandleClaim] = useState<boolean>(false); // facuet handle
   const refTab = useRef({
     killyourSelf: true,
@@ -22,7 +23,6 @@ const FaucetDataSyfin = ({ deData }: FaucetDataSyfinProp) => {
     tokenAddress: string,
     tokenAbi: string
   ) => {
-
     console.log("handling claim", faucetId);
 
     console.log(
@@ -47,7 +47,7 @@ const FaucetDataSyfin = ({ deData }: FaucetDataSyfinProp) => {
         deData.map((item: any) => (
           <div
             key={crypto.randomUUID()}
-            className="flex items-center justify-between w-full p-2 text-sm font-bold"
+            className="flex items-center justify-between w-full p-2 text-sm font-bold  border-b mb-2"
           >
             <li>{item.token}</li>
             <li>{item.faucetWaitTime} </li>

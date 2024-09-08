@@ -1,3 +1,4 @@
+import FaucetHeader from "@/app/components/faucetPanel/FaucetHeader";
 import FaucetData from "@/app/components/faucetPanel/faucetData";
 import FaucetDeath from "@/app/components/faucetPanel/faucetDeath";
 import { HandleGetAllTheFuckingFucets } from "@/app/lib/actions";
@@ -5,20 +6,11 @@ import { HandleGetAllTheFuckingFucets } from "@/app/lib/actions";
 const Page = async () => {
   const AllDeFaucets = await HandleGetAllTheFuckingFucets();
 
-
-
-
   return (
     <section className="bg-[#444] p-10 rounded drop-shadow-lg">
+      <FaucetHeader />
 
-      <header className="p-10 text-center border">
-        <h2 className="text-6xl font-bold mb-6">5ehopDrip</h2>
-        <p className="text-gray-900 text-shadow-lg text-lg font-bold">
-          Request a verity of tokens that get uploaded to our system
-        </p>
-      </header>
-
-      <div>
+      <article>
         <FaucetDeath />
 
         <div className="text-right">
@@ -35,7 +27,8 @@ const Page = async () => {
           {/* faucet data */}
           <FaucetData AllFucets={JSON.stringify(AllDeFaucets)} />
         </div>
-      </div>
+
+      </article>
 
     </section>
   );
