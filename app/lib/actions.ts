@@ -114,6 +114,12 @@ type AddActoinProps = {
   Timepayload: string;
 };
 
+/**
+ *
+ * @param param0
+ * @returns
+ */
+
 export const AddActoin = async ({
   currentFaucetId,
   Timepayload,
@@ -127,47 +133,6 @@ export const AddActoin = async ({
     await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(currentFaucetId, {
       faucetCountDownRemains: Timepayload,
     });
-  } catch (error) {
-    return {
-      status: "error",
-      payload: error,
-    };
-  }
-};
-
-
-/**
- * 
- * @param param0 
- * @returns 
- */
-export const KillingMyselfSlow = async ({
-  currentFaucetId,
-  Timepayload,
-}: AddActoinProps) => {
-  try {
-
-
-    console.log({ currentFaucetId, Timepayload })
-
-    await dbConnect()
-
-
-    await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(currentFaucetId, {
-      
-    })
-
-
-
-
-
-
-
-
-    return {
-      status: "success",
-      payload: "",
-    };
   } catch (error) {
     return {
       status: "error",
@@ -199,26 +164,3 @@ export const HandleFaucetCountdownReset = async (
   }
 };
 
-export const HandleFaucetToggle = async (faucetId: string) => {
-  try {
-    await dbConnect();
-
-    const gg: any = await StupidFuckingFaucetTokenAddition.findById(faucetId);
-
-    if (gg.faucetClaim > 0) {
-      gg?.faucetClaim - 1;
-    }
-
-    await gg.save();
-
-    return {
-      status: "success",
-      payload: "",
-    };
-  } catch (error) {
-    return {
-      status: "error",
-      payload: error,
-    };
-  }
-};

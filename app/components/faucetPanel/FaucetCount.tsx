@@ -1,3 +1,4 @@
+"use client";
 import {
   AddActoin,
   HandleFaucetCountdownReset,
@@ -15,6 +16,9 @@ interface FacuetCountProps {
   statusClaim: boolean;
   faucetHandleClaim: boolean;
   setHandleFaucet: any;
+  referennce: any;
+  handleClaim: any;
+  rewardRare: any;
 }
 
 const FaucetCount = ({
@@ -26,6 +30,9 @@ const FaucetCount = ({
   statusClaim,
   faucetHandleClaim,
   setHandleFaucet,
+  referennce,
+  handleClaim,
+  rewardRare,
 }: FacuetCountProps) => {
   const ref = useRef<any>();
   const count = faucetWaitTime.split(" ");
@@ -39,50 +46,35 @@ const FaucetCount = ({
   );
 
   async function countFunc() {
+    // call fnctions
+    console.log("current values in func", hour, minute);
+
+    setMinute((prev) => prev - 1);
+
     await AddActoin({
       currentFaucetId: faucetId,
       Timepayload: `${hour}H ${minute}M`,
     });
+  }
 
-    if (minute !== 0 || hour !== 0) {
-      hour >= 0 ? setMinute((prev: any) => prev - 1) : null;
+  if (minute === 0 && hour > 0) {
+    setMinute(60);
+    setHour((prev) => prev - 1);
+  }
 
-      // Double check for potential
-      if (hour > 0 && minute === 0) {
-        setHour((prev: any) => prev - 1);
-        setMinute(60);
-      }
-    } else if (minute !== 0 && hour !== 0) {
-      clearInterval(ref.current);
+  const handleLap = async () =>
+    await HandleFaucetCountdownReset(faucetId, fuacetLap);
 
-      if (!faucetHandleClaim) {
-        console.log(statusClaim, "button disabled true");
-        clearInterval(ref.current);
-
-        validClaim((prev) => !prev);
-
-        setHour(0);
-        setMinute(0);
-
-        console.log(statusClaim, "button disabled  false");
-
-        await AddActoin({
-          currentFaucetId: faucetId,
-          Timepayload: `${0}H ${0}M`,
-        });
-      }
-
-      await HandleFaucetCountdownReset(faucetId, fuacetLap);
-    }
-
+  if (hour === 0 && minute === 0) {
+    referennce.current.killyourSelf = false;
+    handleLap();
     clearInterval(ref.current);
   }
 
   useEffect(() => {
     ref.current = setInterval(countFunc, 800);
-
     return () => clearInterval(ref.current);
-  }, [hour, minute]);
+  }, [faucetHandleClaim]);
 
   return (
     <>
@@ -100,9 +92,12 @@ const FaucetCount = ({
       </li>
       <li>
         <button
-          disabled={faucetHandleClaim}
+          disabled={referennce.current.killyourSelf}
+          onClick={() => handleClaim(faucetId, rewardRare)}
           className={`${
-            !faucetHandleClaim ? "bg-[firebrick]" : "bg-emerald-500"
+            referennce.current.killyourSelf
+              ? "bg-[firebrick]"
+              : "bg-emerald-500"
           } hover:bg-[#888] p-2 drop-shadow-lg rounded`}
         >
           claim

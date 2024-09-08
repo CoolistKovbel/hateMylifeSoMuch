@@ -86,12 +86,38 @@ export const AccessTokenContractData = async (
 
     console.log(contractInstance);
 
-
     // const res = await contractInstance.callStatic.approve(account[0], amount);
 
     return {
       status: "success",
       payload: "res",
+    };
+  } catch (error) {
+    return {
+      status: "error",
+      payload: error,
+    };
+  }
+};
+
+/**
+ *
+ * @param
+ *  reward: number
+ *  tokenABI: object
+ *  tokenAddress: stirng
+ * @returns
+ */
+
+export const HandleStupidFuckingFuacetTumble = async (
+  RewardRate: string,
+  tokenAddress: string,
+  tokenAbi: any
+) => {
+  try {
+    return {
+      status: "success",
+      payload: "",
     };
   } catch (error) {
     return {

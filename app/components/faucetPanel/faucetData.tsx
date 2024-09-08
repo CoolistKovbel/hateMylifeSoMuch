@@ -1,4 +1,3 @@
-
 import FaucetDataSyfin from "./FaucetDataSyfin";
 
 interface FacuetDataProps {
@@ -6,7 +5,6 @@ interface FacuetDataProps {
 }
 
 const FaucetData = ({ AllFucets }: FacuetDataProps) => {
-
   let stupidFuckingData: any = JSON.parse(AllFucets).payload || [];
 
   if (AllFucets.status === "error" || stupidFuckingData.length === 0) {
@@ -20,15 +18,14 @@ const FaucetData = ({ AllFucets }: FacuetDataProps) => {
       <ul className="flex items-center justify-between w-full bg-[#6C4675] p-2">
         <li>Facuet Token:</li>
         <li>Faucet waitTime:</li>
-        <li>Faucet Timer:</li>
         <li>Facuet reward:</li>
         <li>Facuet tokens left:</li>
+        <li>Faucet Timer:</li>
         <li>Facuet claim:</li>
       </ul>
 
       {/* body */}
       <FaucetDataSyfin deData={stupidFuckingData} />
-
     </div>
   );
 };

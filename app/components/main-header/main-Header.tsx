@@ -49,11 +49,6 @@ const MainHeader = () => {
 
   const isLogged = userVerified;
 
-  console.log("the current data", {
-    userHandle,
-    userVerified,
-  });
-
   return (
     <header className=" relative z-20 flex flex-col gap-10 w-full">
       <div className="flex items-center justify-between">

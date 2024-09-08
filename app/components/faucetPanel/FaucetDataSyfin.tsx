@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import FaucetCount from "./FaucetCount";
-import { HandleFaucetToggle } from "@/app/lib/actions";
 import { ethers } from "ethers";
 
 interface FaucetDataSyfinProp {
@@ -11,22 +10,24 @@ interface FaucetDataSyfinProp {
 const FaucetDataSyfin = ({ deData }: FaucetDataSyfinProp) => {
   const [validClaim, setValidClaim] = useState<boolean>(true); // faucet claim
   const [validHandleClaim, setValidHandleClaim] = useState<boolean>(false); // facuet handle
+  const refTab = useRef({
+    killyourSelf: true,
+  });
 
-
+  // Todo finish this... literally.
   const handleClaim = async (faucetId: string, rewardrate: number) => {
     console.log("handling claim", faucetId);
     console.log(
       `here is your reward +${ethers.utils.parseEther(rewardrate.toString())}`
     );
 
-    const res = await HandleFaucetToggle(faucetId);
+    const res = await HandleStupidFuckingFuacetTumble(rewardrate,  );
 
     if (res.status === "success") {
-      setValidClaim((prev) => !prev);
+      setValidHandleClaim((prev) => !prev);
+      refTab.current.killyourSelf = true;
     }
-
   };
-
 
   return (
     <ul className=" bg-[#6C4675] ">
@@ -38,6 +39,8 @@ const FaucetDataSyfin = ({ deData }: FaucetDataSyfinProp) => {
           >
             <li>{item.token}</li>
             <li>{item.faucetWaitTime} </li>
+            <li>{item.RewardRate}</li>
+            <li>{item.amount}</li>
             <FaucetCount
               fuacetLap={item.faucetLaps}
               remainingCountdown={item.faucetCountDownRemains}
@@ -45,22 +48,12 @@ const FaucetDataSyfin = ({ deData }: FaucetDataSyfinProp) => {
               validClaim={setValidClaim}
               statusClaim={validClaim}
               faucetId={item._id}
+              rewardRare={item.RewardRate}
               faucetHandleClaim={validHandleClaim} //bool
-              setHandleFaucet={setValidHandleClaim} 
+              setHandleFaucet={setValidHandleClaim}
+              referennce={refTab}
+              handleClaim={handleClaim}
             />
-            <li>{item.RewardRate}</li>
-            <li>{item.amount}</li>
-            <li>
-              <button
-                disabled={validClaim}
-                onClick={() => handleClaim(item._id, item.RewardRate)}
-                className={`${
-                  validClaim ? "bg-[firebrick]" : "bg-emerald-500"
-                } hover:bg-[#888] p-2 drop-shadow-lg rounded`}
-              >
-                claim
-              </button>
-            </li>
           </div>
         ))}
     </ul>
