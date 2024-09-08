@@ -50,7 +50,7 @@ const MainHeader = () => {
   const isLogged = userVerified;
 
   return (
-    <header className=" relative z-20 flex flex-col gap-10 w-full">
+    <header className=" relative z-20 flex flex-col gap-10 w-full ">
       <div className="flex items-center justify-between">
         {isLogged ? (
           <h1 className="text-2xl font-bold">Hello, {`${userHandle}`}</h1>

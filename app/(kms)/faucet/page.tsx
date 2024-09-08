@@ -1,16 +1,19 @@
 import FaucetData from "@/app/components/faucetPanel/faucetData";
 import FaucetDeath from "@/app/components/faucetPanel/faucetDeath";
 import { HandleGetAllTheFuckingFucets } from "@/app/lib/actions";
-import React from "react";
 
 const Page = async () => {
   const AllDeFaucets = await HandleGetAllTheFuckingFucets();
 
+
+
+
   return (
-    <section>
-      <header className="p-10 text-center">
-        <h2 className="text-6xl font-bold mb-6">Want to die</h2>
-        <p className="text-gray-500 text-md">
+    <section className="bg-[#444] p-10 rounded drop-shadow-lg">
+
+      <header className="p-10 text-center border">
+        <h2 className="text-6xl font-bold mb-6">5ehopDrip</h2>
+        <p className="text-gray-900 text-shadow-lg text-lg font-bold">
           Request a verity of tokens that get uploaded to our system
         </p>
       </header>
@@ -18,7 +21,7 @@ const Page = async () => {
       <div>
         <FaucetDeath />
 
-        <div className="text-center">
+        <div className="text-right">
           <select
             name="sortBy"
             id="sortBy"
@@ -33,6 +36,7 @@ const Page = async () => {
           <FaucetData AllFucets={JSON.stringify(AllDeFaucets)} />
         </div>
       </div>
+
     </section>
   );
 };

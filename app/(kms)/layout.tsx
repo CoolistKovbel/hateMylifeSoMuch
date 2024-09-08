@@ -7,7 +7,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="p-10 flex flex-col justify-between w-full min-h-screen">
+    <main className="p-10 flex flex-col justify-between w-full min-h-screen bg-[#222]">
       <MainHeader />
       {children}
       <MainFooter />

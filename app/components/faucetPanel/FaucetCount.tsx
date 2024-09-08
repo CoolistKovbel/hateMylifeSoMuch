@@ -4,7 +4,7 @@ import {
   HandleFaucetCountdownReset,
   KillingMyselfSlow,
 } from "@/app/lib/actions";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 interface FacuetCountProps {
@@ -46,15 +46,8 @@ const FaucetCount = ({
   );
 
   async function countFunc() {
-    // call fnctions
-    console.log("current values in func", hour, minute);
-
-    setMinute((prev) => prev - 1);
-
-    await AddActoin({
-      currentFaucetId: faucetId,
-      Timepayload: `${hour}H ${minute}M`,
-    });
+    // Automatic func
+    setMinute((prev: any) => prev - 1);
   }
 
   if (minute === 0 && hour > 0) {
@@ -67,9 +60,23 @@ const FaucetCount = ({
 
   if (hour === 0 && minute === 0) {
     referennce.current.killyourSelf = false;
+    async () => Promise.resolve(x());
     handleLap();
     clearInterval(ref.current);
   }
+
+  const x = async () => {
+    const res = await AddActoin({
+      currentFaucetId: faucetId,
+      Timepayload: `${hour}H ${minute}M`,
+    });
+
+    console.log(res);
+  };
+
+  useEffect(() => {
+    x();
+  }, [hour, minute]);
 
   useEffect(() => {
     ref.current = setInterval(countFunc, 800);

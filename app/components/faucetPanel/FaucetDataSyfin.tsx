@@ -30,12 +30,12 @@ const FaucetDataSyfin = ({ deData }: FaucetDataSyfinProp) => {
   };
 
   return (
-    <ul className=" bg-[#6C4675] ">
+    <ul className=" bg-[#6C4675] drop-shadow-lg rounded p-2 ">
       {deData &&
         deData.map((item: any) => (
           <div
             key={crypto.randomUUID()}
-            className="flex items-center justify-between w-full p-2"
+            className="flex items-center justify-between w-full p-2 text-sm font-bold"
           >
             <li>{item.token}</li>
             <li>{item.faucetWaitTime} </li>

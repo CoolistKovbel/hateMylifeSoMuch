@@ -130,9 +130,17 @@ export const AddActoin = async ({
     console.log("======");
     console.log(currentFaucetId, Timepayload);
 
-    await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(currentFaucetId, {
+    const res = await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(currentFaucetId, {
       faucetCountDownRemains: Timepayload,
     });
+
+    console.log(res)
+
+
+    return {
+      status: "success",
+      payload: "",
+    };
   } catch (error) {
     return {
       status: "error",

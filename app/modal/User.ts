@@ -17,41 +17,13 @@ export interface IUser {
 
 const UserSchema = new mongoose.Schema<IUser>(
   {
-    username: {
-      type: String,
-      min: 4,
-      max: 24,
-      unique: true,
-    },
-    email: {
-      type: String,
-    },
-    description: {
-      type: String,
-    },
-    preference: {
-      type: String,
-    },
-    image: {
-      type: String,
-    },
     metaAddress: {
       type: String,
       unique: true,
-      required: true,
     },
     sig: {
       type: String,
       unique: true,
-    },
-    role: {
-      type: String,
-      default: "USER",
-      enum: ["USER", "ADMIN", "CAPTAIN"],
-    },
-    isPro: {
-      type: Boolean,
-      default: false,
     },
   },
   { timestamps: true }
