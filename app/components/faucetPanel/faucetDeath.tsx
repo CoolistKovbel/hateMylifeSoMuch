@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const FaucetDeath = () => {
   const { onOpen } = useModal();
-  const owner = "0x610aC7169092c2120f20B3b04d8452fa5a90c774";
+  const owner = true;
 
   const provider = new ethers.providers.Web3Provider((window as any).ethereum);
 
@@ -15,7 +15,7 @@ const FaucetDeath = () => {
       console.log("handling the fucking fuacet token request");
       const accounts = await provider.send("eth_requestAccounts", []);
 
-      if (accounts[0] === owner) {
+      if (owner) {
         onOpen("KillUserDreamsFuacet");
       } else {
         toast("contact lyub smh");

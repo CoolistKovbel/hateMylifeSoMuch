@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { StupidFuckingFaucetTokenAddition } from "./StupidFuckingFaucetTokenAddition";
 
 export interface IUser {
   username: string;
@@ -11,6 +12,7 @@ export interface IUser {
   metaAddress: string;
   sig: string;
   description: string;
+  userFaucets: any;
 }
 
 // TODO: Make it better......
@@ -25,6 +27,10 @@ const UserSchema = new mongoose.Schema<IUser>(
       type: String,
       unique: true,
     },
+    userFaucets: [{
+      type: mongoose.Types.ObjectId,
+      ref: StupidFuckingFaucetTokenAddition
+    }]
   },
   { timestamps: true }
 );

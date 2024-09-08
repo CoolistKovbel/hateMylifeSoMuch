@@ -130,11 +130,13 @@ export const AddActoin = async ({
     console.log("======");
     console.log(currentFaucetId, Timepayload);
 
-    const res = await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(currentFaucetId, {
-      faucetCountDownRemains: Timepayload,
-    });
+    const res = await StupidFuckingFaucetTokenAddition.findByIdAndUpdate(
+      currentFaucetId,
+      {
+        faucetCountDownRemains: Timepayload,
+      }
+    );
 
-    console.log(res)
 
 
     return {
@@ -171,4 +173,3 @@ export const HandleFaucetCountdownReset = async (
     };
   }
 };
-

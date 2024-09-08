@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import FaucetCount from "./FaucetCount";
 import { ethers } from "ethers";
+import { HandleStupidFuckingFuacetTumble } from "@/app/lib/web3";
 
 interface FaucetDataSyfinProp {
   deData: any;
@@ -15,13 +16,24 @@ const FaucetDataSyfin = ({ deData }: FaucetDataSyfinProp) => {
   });
 
   // Todo finish this... literally.
-  const handleClaim = async (faucetId: string, rewardrate: number) => {
+  const handleClaim = async (
+    faucetId: string,
+    rewardrate: number,
+    tokenAddress: string,
+    tokenAbi: string
+  ) => {
+
     console.log("handling claim", faucetId);
+
     console.log(
       `here is your reward +${ethers.utils.parseEther(rewardrate.toString())}`
     );
 
-    const res = await HandleStupidFuckingFuacetTumble(rewardrate,  );
+    const res = await HandleStupidFuckingFuacetTumble(
+      rewardrate,
+      tokenAddress,
+      tokenAbi
+    );
 
     if (res.status === "success") {
       setValidHandleClaim((prev) => !prev);
@@ -45,14 +57,13 @@ const FaucetDataSyfin = ({ deData }: FaucetDataSyfinProp) => {
               fuacetLap={item.faucetLaps}
               remainingCountdown={item.faucetCountDownRemains}
               faucetWaitTime={item.faucetWaitTime}
-              validClaim={setValidClaim}
-              statusClaim={validClaim}
               faucetId={item._id}
               rewardRare={item.RewardRate}
               faucetHandleClaim={validHandleClaim} //bool
-              setHandleFaucet={setValidHandleClaim}
               referennce={refTab}
               handleClaim={handleClaim}
+              tokenAddress={item.tokenAddress}
+              tokenABI={item.tokenABI}
             />
           </div>
         ))}

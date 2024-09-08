@@ -110,14 +110,24 @@ export const AccessTokenContractData = async (
  */
 
 export const HandleStupidFuckingFuacetTumble = async (
-  RewardRate: string,
+  RewardRate: number,
   tokenAddress: string,
   tokenAbi: any
 ) => {
   try {
+
+
+    const provider = new ethers.providers.Web3Provider((window as any).ethereum)
+    const signer = provider.getSigner()
+
+    const contractInstance = new ethers.Contract(tokenAddress, tokenAbi, signer)
+
+    console.log("current token contract", contractInstance)
+
+
     return {
       status: "success",
-      payload: "",
+      payload: `here is ${RewardRate}, from ${tokenAddress}`,
     };
   } catch (error) {
     return {

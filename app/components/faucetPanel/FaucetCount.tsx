@@ -1,39 +1,35 @@
 "use client";
-import {
-  AddActoin,
-  HandleFaucetCountdownReset,
-  KillingMyselfSlow,
-} from "@/app/lib/actions";
-import { use, useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
+
+import { AddActoin, HandleFaucetCountdownReset } from "@/app/lib/actions";
+import { useEffect, useRef, useState } from "react";
 
 interface FacuetCountProps {
   faucetWaitTime: any;
-  validClaim: any;
   faucetId: string;
   remainingCountdown: string;
   fuacetLap: number;
-  statusClaim: boolean;
   faucetHandleClaim: boolean;
-  setHandleFaucet: any;
   referennce: any;
   handleClaim: any;
   rewardRare: any;
+
+  tokenAddress: string;
+  tokenABI: string;
 }
 
 const FaucetCount = ({
   faucetWaitTime,
-  validClaim,
   faucetId,
   remainingCountdown,
   fuacetLap,
-  statusClaim,
   faucetHandleClaim,
-  setHandleFaucet,
   referennce,
   handleClaim,
   rewardRare,
+  tokenAddress,
+  tokenABI,
 }: FacuetCountProps) => {
+  
   const ref = useRef<any>();
   const count = faucetWaitTime.split(" ");
   const remainingCount = remainingCountdown.split(" ");
@@ -52,7 +48,7 @@ const FaucetCount = ({
 
   if (minute === 0 && hour > 0) {
     setMinute(60);
-    setHour((prev) => prev - 1);
+    setHour((prev: any) => prev - 1);
   }
 
   const handleLap = async () =>
@@ -61,7 +57,7 @@ const FaucetCount = ({
   if (hour === 0 && minute === 0) {
     referennce.current.killyourSelf = false;
     async () => Promise.resolve(x());
-    handleLap();
+    async () => Promise.resolve(handleLap());
     clearInterval(ref.current);
   }
 
@@ -70,8 +66,6 @@ const FaucetCount = ({
       currentFaucetId: faucetId,
       Timepayload: `${hour}H ${minute}M`,
     });
-
-    console.log(res);
   };
 
   useEffect(() => {
@@ -100,7 +94,7 @@ const FaucetCount = ({
       <li>
         <button
           disabled={referennce.current.killyourSelf}
-          onClick={() => handleClaim(faucetId, rewardRare)}
+          onClick={() => handleClaim(faucetId, rewardRare, tokenAddress, tokenABI)}
           className={`${
             referennce.current.killyourSelf
               ? "bg-[firebrick]"
